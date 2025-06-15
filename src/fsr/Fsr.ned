@@ -24,6 +24,10 @@ simple Fsr
     parameters:
         @class("fsr::Fsr");
         @display("i=block/routing");
+        
+        @signal[controlPacketCount](type=int);
+        @signal[controlBitsCount](type=int);
+        
         string routingTableModule = default("^.ipv4.routingTable");
         string interfaceTableModule = default("^.interfaceTable");
         

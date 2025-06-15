@@ -29,10 +29,18 @@ class FsrNetwatch : public omnetpp::cSimpleModule
 {
 protected:
     omnetpp::simtime_t updateInterval;
+    bool drawNetwork;
 
     virtual void initialize() override;
     virtual void handleMessage(omnetpp::cMessage* msg) override;
-    virtual void handleAverageDegree();
+    void handleAverageDegree();
+    void handleDrawNetwork();
+    void handleAverageContol();
+    void drawConnection(cModule* first, cModule* second);
+    void clearConnections();
+
+    omnetpp::cCanvas *canvas = nullptr;
+    std::vector<omnetpp::cLineFigure*> connectionLines;
 
     omnetpp::cMessage* updateTimer;
 
@@ -41,6 +49,12 @@ protected:
     int averageDegree = 0;
 
     omnetpp::simsignal_t averageDegreeSignal;
+
+    double averageControlPacketCount = 0;
+    double averageControlBitsCount = 0;
+
+    omnetpp::simsignal_t averageControlPacketCountSignal;
+    omnetpp::simsignal_t averageControlBitsCountSignal;
 
 public:
     FsrNetwatch();

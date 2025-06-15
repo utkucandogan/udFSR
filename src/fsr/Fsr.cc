@@ -48,6 +48,9 @@ void Fsr::initialize(int stage)
         updateInterval = par("updateInterval");
         udpPort = par("udpPort");
 
+        controlPacketCountSignal = registerSignal("controlPacketCount");
+        controlBitsCountSignal = registerSignal("controlBitsCount");
+
         auto scopeStr = std::istringstream(par("scopes").stdstringValue());
 
         for (std::string token ; std::getline(scopeStr, token, ' ') ;) {
@@ -331,6 +334,12 @@ const char* FsrPacketName(FsrPacketType type)
 
 void Fsr::sendPacket(const inet::Ptr<FsrPacket>& fsrPacket, int timeToLive)
 {
+    ++controlPacketCount;
+    controlBitsCount += fsrPacket->getChunkLength().get() * 8;
+
+    emit(controlPacketCountSignal, controlPacketCount);
+    emit(controlBitsCountSignal, controlBitsCount);
+
     auto packet = new inet::Packet(FsrPacketName(fsrPacket->getPacketType()), fsrPacket);
     int interfaceId = CHK(interfaceTable->findInterfaceByName(par("interface")))->getInterfaceId();
 

@@ -61,6 +61,12 @@ protected:
     std::map<inet::L3Address, TopologyInfo> topology;
     size_t scopeIndex = 0;
 
+    int controlPacketCount = 0;
+    int controlBitsCount = 0;
+
+    omnetpp::simsignal_t controlPacketCountSignal;
+    omnetpp::simsignal_t controlBitsCountSignal;
+
     void initialize(int stage) override;
     void handleMessageWhenUp(omnetpp::cMessage *msg) override;
 

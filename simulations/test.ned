@@ -28,7 +28,7 @@ import inet.environment.common.PhysicalEnvironment;
 import udFSR.fsr.FsrHost;
 import udFSR.fsr.FsrNetwatch;
 
-network WirelessA
+network Test
 {
     parameters:
         @display("bgb=650,500;bgg=100,1,grey95");

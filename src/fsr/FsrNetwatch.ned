@@ -24,8 +24,15 @@ simple FsrNetwatch
     parameters:
         @class("fsr::FsrNetwatch");
         @display("i=block/table");
-        double updateInterval @unit(s)= default(1s);
+        double updateInterval @unit(s) = default(1s);
+        bool drawNetwork = default(false);
         
         @signal[averageDegree](type=int);
         @statistic[averageDegree](title="Average Degree"; source=averageDegree; record=vector);
+        
+        @signal[averageControlPacketCount](type=double);
+        @statistic[averageControlPacketCount](title="Average Control Packet Count"; source=averageControlPacketCount; record=vector);
+        
+        @signal[averageControlBitsCount](type=double);
+        @statistic[averageControlBitsCount](title="Average Control Bits Count"; source=averageControlBitsCount; record=vector);
 }
