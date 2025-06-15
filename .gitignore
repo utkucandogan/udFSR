@@ -50,6 +50,8 @@ core
 
 # Simulation outputs
 results/
+exports/
+plots/
 simulations/results/
 simulations/omnetpp.ini~  # backup
 simulations/*.out
