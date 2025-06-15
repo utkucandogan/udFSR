@@ -1,0 +1,75 @@
+# General OS files
+.DS_Store
+Thumbs.db
+
+# Eclipse and OMNeT++ IDE metadata
+.project
+.cproject
+.settings/
+.omnetpp*
+*.workspace
+.qtenvrc
+
+# Make and build artifacts
+*/**/Makefile
+Makefile.inc
+configure
+config.status
+config.log
+*.o
+*.d
+*.lo
+*.la
+.libs/
+.deps/
+build/
+output/
+out/
+
+# OMNeT++ output and intermediate files
+*.ned~          # NED backups
+*.msg~          # MSG backups
+*.vec
+*.vci
+*.sca
+*.elog
+*.run
+*.ini~          # INI backups
+*.out
+*.log
+*.bak
+*.old
+core
+*.pyc
+*.pyo
+*.so
+*.a
+*.dll
+*.def
+*.exe
+
+# Simulation outputs
+results/
+simulations/results/
+simulations/omnetpp.ini~  # backup
+simulations/*.out
+simulations/*.vec
+simulations/*.sca
+
+# Generated code (from .msg, .ned)
+*_m.cc
+*_m.h
+*.neddump
+*.msgdump
+
+# Visualizer cache
+animation.json
+*.tkenvrc
+
+# Debug and crash artifacts
+gmon.out
+vgcore.*
+valgrind.log
+
+# IDE index and cache files
+.metadata/
