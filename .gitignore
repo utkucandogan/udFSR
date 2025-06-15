@@ -55,6 +55,7 @@ simulations/omnetpp.ini~  # backup
 simulations/*.out
 simulations/*.vec
 simulations/*.sca
+simulations/*.anf
 
 # Generated code (from .msg, .ned)
 *_m.cc

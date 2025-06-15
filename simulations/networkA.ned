@@ -26,6 +26,7 @@ import inet.visualizer.contract.IIntegratedVisualizer;
 import inet.environment.common.PhysicalEnvironment;
 
 import udFSR.fsr.FsrHost;
+import udFSR.fsr.FsrNetwatch;
 
 network WirelessA
 {
@@ -46,22 +47,25 @@ network WirelessA
         radioMedium: <default("UnitDiskRadioMedium")> like IRadioMedium {
             @display("p=580,275");
         }
+        fsrNetwatch: FsrNetwatch {
+            @display("p=580,350");
+        }
         physicalEnvironment: PhysicalEnvironment {
             @display("p=580,425");
         }
-        hostA: <default("FsrHost")> like INetworkNode {
+        hostA: FsrHost {
             @display("p=50,325");
         }
-        hostB: <default("FsrHost")> like INetworkNode {
+        hostB: FsrHost {
             @display("p=450,325");
         }
-        hostR1: <default("FsrHost")> like INetworkNode {
+        hostR1: FsrHost {
             @display("p=250,300");
         }
-        hostR2: <default("FsrHost")> like INetworkNode {
+        hostR2: FsrHost {
             @display("p=150,450");
         }
-        hostR3: <default("FsrHost")> like INetworkNode {
+        hostR3: FsrHost {
             @display("p=350,450");
         }
 }

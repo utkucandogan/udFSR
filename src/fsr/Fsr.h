@@ -38,6 +38,8 @@ namespace fsr {
 class Fsr : public inet::RoutingProtocolBase, public inet::UdpSocket::ICallback
 {
 protected:
+    friend class FsrNetwatch;
+
     inet::UdpSocket socket;
     unsigned int udpPort = 0;
     inet::L3Address selfIPAddr;
