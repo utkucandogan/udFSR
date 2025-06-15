@@ -32,6 +32,7 @@ simple Fsr
         double updateInterval @unit(s) = default(5s);
         int udpPort = default(654);
         string interface = default("wlan0");
+        double clockOffset @unit(s)  = default(uniform(0s, helloInterval));
         
     gates:
         input socketIn;

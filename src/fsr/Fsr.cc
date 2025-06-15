@@ -76,17 +76,17 @@ void Fsr::handleMessageWhenUp(omnetpp::cMessage *msg)
 /* Self message handlers */
 void Fsr::sendHello()
 {
+    // Stale the connections every time we send a hello packet
+    if (staleHello()) {
+        updateRoutes();
+    }
+
     auto& seqNum = topology[getSelfIPAddress()].seqNum;
 
     auto hello = inet::makeShared<Hello>();
     hello->setPacketType(FsrPacketType::HELLO);
     hello->setOrigin(getSelfIPAddress());
     hello->setSeqNum(++seqNum);
-
-//    // Stale the connections every time we send a hello packet
-//    if (staleHello()) {
-//        updateRoutes();
-//    }
 
     auto usingIpv6 = (getSelfIPAddress().getType() == inet::L3Address::IPv6);
     hello->setChunkLength(usingIpv6 ? inet::B(24) : inet::B(12));
@@ -98,6 +98,11 @@ void Fsr::sendHello()
 
 void Fsr::sendUpdate()
 {
+    // Stale the connections every time we send a update packet
+    if (staleUpdate()) {
+        updateRoutes();
+    }
+
     auto& seqNum = topology[getSelfIPAddress()].seqNum;
 
     auto update = inet::makeShared<Update>();
@@ -382,8 +387,10 @@ void Fsr::handleStartOperation(inet::LifecycleOperation *operation)
     socket.setCallback(this);
     socket.setBroadcast(true);
 
-    scheduleAfter(helloInterval, helloTimer);
-    scheduleAfter(updateInterval, updateTimer);
+    omnetpp::simtime_t clockOffset = par("clockOffset");
+
+    scheduleAfter(clockOffset + helloInterval, helloTimer);
+    scheduleAfter(clockOffset + updateInterval, updateTimer);
 
     auto myName = getParentModule()->getFullName();
     auto myIP = getSelfIPAddress().str();
